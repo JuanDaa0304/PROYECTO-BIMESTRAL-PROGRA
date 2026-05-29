@@ -48,7 +48,7 @@ public class EntregasServicio {
         entrega.setUsuarioidUsuario(SesionActual.getUsuario());
 
         entregaController.create(entrega);
-        System.out.println("✔ Entrega registrada. Receptor: " + nombreReceptor);
+        System.out.println("  Entrega registrada. Receptor: " + nombreReceptor);
         return entrega;
     }
 
@@ -68,7 +68,7 @@ public class EntregasServicio {
 
         Paquete paquete = paqueteService.buscarPorNumSeguimientoInterno(numSeguimiento);
         if (paquete == null) {
-            throw new Exception("No existe paquete con número: " + numSeguimiento);
+            throw new Exception("No existe paquete con numero: " + numSeguimiento);
         }
 
         List<Entrega> todas = entregaController.findEntregaEntities();
@@ -93,6 +93,6 @@ public class EntregasServicio {
         }
         entrega.setObservaciones(nuevasObservaciones);
         entregaController.edit(entrega);
-        System.out.println("✔ Observaciones de entrega actualizadas.");
+        System.out.println(" Observaciones de entrega actualizadas.");
     }
 }

@@ -36,7 +36,7 @@ public class ClienteServicio {
         if (telefono != null && !telefono.trim().isEmpty()) {
             for (Cliente c : clienteController.findClienteEntities()) {
                 if (telefono.trim().equals(c.getTelefono())) {
-                    throw new Exception("Ya existe un cliente con el teléfono: " + telefono);
+                    throw new Exception("Ya existe un cliente con el telefono: " + telefono);
                 }
             }
         }
@@ -49,7 +49,7 @@ public class ClienteServicio {
         cliente.setUsuarioidUsuario(SesionActual.getUsuario());
 
         clienteController.create(cliente);
-        System.out.println("✔ Cliente registrado: " + nombre + " (ID: " + cliente.getIdCliente() + ")");
+        System.out.println(" Cliente registrado: " + nombre + " (ID: " + cliente.getIdCliente() + ")");
         return cliente;
     }
 
@@ -113,7 +113,7 @@ public class ClienteServicio {
         }
 
         clienteController.edit(cliente);
-        System.out.println("✔ Cliente actualizado correctamente.");
+        System.out.println(" Cliente actualizado correctamente.");
     }
 
     // ---------------------------------------------------------------
@@ -130,6 +130,6 @@ public class ClienteServicio {
             throw new Exception("No se puede eliminar el cliente porque tiene paquetes registrados.");
         }
         clienteController.destroy(idCliente);
-        System.out.println("✔ Cliente eliminado.");
+        System.out.println("Cliente eliminado.");
     }
 }

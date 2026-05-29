@@ -13,13 +13,13 @@ import java.util.Scanner;
 
 public class Main {
 
-    static Scanner sc = new Scanner(System.in);
-    static UsuarioServicio usuarioService   = new UsuarioServicio();
-    static ClienteServicio clienteService   = new ClienteServicio();
-    static PaqueteServicio paqueteService   = new PaqueteServicio();
+    static Scanner tcl = new Scanner(System.in);
+    static UsuarioServicio usuarioService = new UsuarioServicio();
+    static ClienteServicio clienteService = new ClienteServicio();
+    static PaqueteServicio paqueteService = new PaqueteServicio();
     static DespachoServicio despachoService = new DespachoServicio();
-    static EntregasServicio entregaService   = new EntregasServicio();
-    static RolServicio rolService           = new RolServicio();
+    static EntregasServicio entregaService = new EntregasServicio();
+    static RolServicio rolService = new RolServicio();
 
     public static void main(String[] args) {
 
@@ -36,10 +36,18 @@ public class Main {
             } else {
                 String rol = SesionActual.getRolActual();
                 switch (rol) {
-                    case ValidarRol.RECEPCIONISTA: menuRecepcionista(); break;
-                    case ValidarRol.OPERADOR:      menuOperador();      break;
-                    case ValidarRol.REPARTIDOR:    menuRepartidor();    break;
-                    case ValidarRol.CLIENTE:       menuCliente();       break;
+                    case ValidarRol.RECEPCIONISTA:
+                        menuRecepcionista();
+                        break;
+                    case ValidarRol.OPERADOR:
+                        menuOperador();
+                        break;
+                    case ValidarRol.REPARTIDOR:
+                        menuRepartidor();
+                        break;
+                    case ValidarRol.CLIENTE:
+                        menuCliente();
+                        break;
                     default:
                         System.out.println("Rol no reconocido. Cerrando sesion.");
                         SesionActual.cerrarSesion();
@@ -54,9 +62,9 @@ public class Main {
     static void menuLogin() {
         System.out.println("\n--- INICIAR SESION ---");
         System.out.print("Correo    : ");
-        String correo = sc.nextLine().trim();
-        System.out.print("Contrasena: ");
-        String contrasenia = sc.nextLine().trim();
+        String correo = tcl.nextLine().trim();
+        System.out.print("Contrasenia: ");
+        String contrasenia = tcl.nextLine().trim();
         try {
             Usuario usuario = usuarioService.login(correo, contrasenia);
             SesionActual.iniciarSesion(usuario);
@@ -91,22 +99,45 @@ public class Main {
         System.out.println("  0. Cerrar sesion                        ");
         System.out.println("==========================================");
         System.out.print("Opcion: ");
-        String op = sc.nextLine().trim();
+        String op = tcl.nextLine().trim();
         System.out.println();
         try {
             switch (op) {
-                case "1":  registrarCliente();       break;
-                case "2":  listarClientes();         break;
-                case "3":  buscarClienteNombre();    break;
-                case "4":  actualizarCliente();      break;
-                case "5":  registrarPaquete();       break;
-                case "6":  listarPaquetes();         break;
-                case "7":  consultarPaquete();       break;
-                case "8":  verHistorial();           break;
-                case "9":  registrarUsuario();       break;
-                case "10": listarUsuarios();         break;
-                case "0":  SesionActual.cerrarSesion(); break;
-                default:   System.out.println("[!] Opcion no valida.");
+                case "1":
+                    registrarCliente();
+                    break;
+                case "2":
+                    listarClientes();
+                    break;
+                case "3":
+                    buscarClienteNombre();
+                    break;
+                case "4":
+                    actualizarCliente();
+                    break;
+                case "5":
+                    registrarPaquete();
+                    break;
+                case "6":
+                    listarPaquetes();
+                    break;
+                case "7":
+                    consultarPaquete();
+                    break;
+                case "8":
+                    verHistorial();
+                    break;
+                case "9":
+                    registrarUsuario();
+                    break;
+                case "10":
+                    listarUsuarios();
+                    break;
+                case "0":
+                    SesionActual.cerrarSesion();
+                    break;
+                default:
+                    System.out.println("[!] Opcion no valida.");
             }
         } catch (Exception e) {
             System.out.println("[!] " + e.getMessage());
@@ -129,17 +160,30 @@ public class Main {
         System.out.println("  0. Cerrar sesion                        ");
         System.out.println("==========================================");
         System.out.print("Opcion: ");
-        String op = sc.nextLine().trim();
+        String op = tcl.nextLine().trim();
         System.out.println();
         try {
             switch (op) {
-                case "1": registrarDespacho();                                         break;
-                case "2": listarPaquetesPorEstado(PaqueteServicio.ESTADO_REGISTRADO);  break;
-                case "3": listarPaquetesPorEstado(PaqueteServicio.ESTADO_EN_TRANSITO); break;
-                case "4": consultarPaquete();                                          break;
-                case "5": verHistorial();                                              break;
-                case "0": SesionActual.cerrarSesion();                                break;
-                default:  System.out.println("[!] Opcion no valida.");
+                case "1":
+                    registrarDespacho();
+                    break;
+                case "2":
+                    listarPaquetesPorEstado(PaqueteServicio.ESTADO_REGISTRADO);
+                    break;
+                case "3":
+                    listarPaquetesPorEstado(PaqueteServicio.ESTADO_EN_TRANSITO);
+                    break;
+                case "4":
+                    consultarPaquete();
+                    break;
+                case "5":
+                    verHistorial();
+                    break;
+                case "0":
+                    SesionActual.cerrarSesion();
+                    break;
+                default:
+                    System.out.println("[!] Opcion no valida.");
             }
         } catch (Exception e) {
             System.out.println("[!] " + e.getMessage());
@@ -162,17 +206,30 @@ public class Main {
         System.out.println("  0. Cerrar sesion                        ");
         System.out.println("==========================================");
         System.out.print("Opcion: ");
-        String op = sc.nextLine().trim();
+        String op = tcl.nextLine().trim();
         System.out.println();
         try {
             switch (op) {
-                case "1": registrarEntrega();                                          break;
-                case "2": listarPaquetesPorEstado(PaqueteServicio.ESTADO_EN_TRANSITO); break;
-                case "3": listarPaquetesPorEstado(PaqueteServicio.ESTADO_ENTREGADO);   break;
-                case "4": consultarPaquete();                                          break;
-                case "5": verHistorial();                                              break;
-                case "0": SesionActual.cerrarSesion();                                break;
-                default:  System.out.println("[!] Opcion no valida.");
+                case "1":
+                    registrarEntrega();
+                    break;
+                case "2":
+                    listarPaquetesPorEstado(PaqueteServicio.ESTADO_EN_TRANSITO);
+                    break;
+                case "3":
+                    listarPaquetesPorEstado(PaqueteServicio.ESTADO_ENTREGADO);
+                    break;
+                case "4":
+                    consultarPaquete();
+                    break;
+                case "5":
+                    verHistorial();
+                    break;
+                case "0":
+                    SesionActual.cerrarSesion();
+                    break;
+                default:
+                    System.out.println(" Opcion no valida.");
             }
         } catch (Exception e) {
             System.out.println("[!] " + e.getMessage());
@@ -192,14 +249,21 @@ public class Main {
         System.out.println("  0. Cerrar sesion                        ");
         System.out.println("==========================================");
         System.out.print("Opcion: ");
-        String op = sc.nextLine().trim();
+        String op = tcl.nextLine().trim();
         System.out.println();
         try {
             switch (op) {
-                case "1": consultarPaquete();          break;
-                case "2": verHistorial();              break;
-                case "0": SesionActual.cerrarSesion(); break;
-                default:  System.out.println("[!] Opcion no valida.");
+                case "1":
+                    consultarPaquete();
+                    break;
+                case "2":
+                    verHistorial();
+                    break;
+                case "0":
+                    SesionActual.cerrarSesion();
+                    break;
+                default:
+                    System.out.println("  Opcion no valida.");
             }
         } catch (Exception e) {
             System.out.println("[!] " + e.getMessage());
@@ -211,37 +275,47 @@ public class Main {
     // ================================================================
     static void registrarCliente() throws Exception {
         System.out.println("--- Registrar Cliente ---");
-        System.out.print("Nombre    : "); String nombre    = sc.nextLine().trim();
-        System.out.print("Apellido  : "); String apellido  = sc.nextLine().trim();
-        System.out.print("Telefono  : "); String telefono  = sc.nextLine().trim();
-        System.out.print("Direccion : "); String direccion = sc.nextLine().trim();
+        System.out.print("Nombre    : ");
+        String nombre = tcl.nextLine().trim();
+        System.out.print("Apellido  : ");
+        String apellido = tcl.nextLine().trim();
+        System.out.print("Telefono  : ");
+        String telefono = tcl.nextLine().trim();
+        System.out.print("Direccion : ");
+        String direccion = tcl.nextLine().trim();
         clienteService.registrarCliente(nombre, apellido, telefono, direccion);
     }
 
     static void listarClientes() throws Exception {
         System.out.println("--- Clientes Registrados ---");
         List<Cliente> lista = clienteService.listarTodos();
-        if (lista.isEmpty()) { System.out.println("  Sin clientes registrados."); return; }
+        if (lista.isEmpty()) {
+            System.out.println("  Sin clientes registrados.");
+            return;
+        }
         System.out.printf("%-6s %-18s %-18s %-15s %-20s%n",
-            "ID", "Nombre", "Apellido", "Telefono", "Direccion");
+                "ID", "Nombre", "Apellido", "Telefono", "Direccion");
         System.out.println("--------------------------------------------------------------------------------");
         for (Cliente c : lista) {
             System.out.printf("%-6d %-18s %-18s %-15s %-20s%n",
-                c.getIdCliente(), c.getNombre(), c.getApellido(),
-                c.getTelefono(), c.getDireccion());
+                    c.getIdCliente(), c.getNombre(), c.getApellido(),
+                    c.getTelefono(), c.getDireccion());
         }
     }
 
     static void buscarClienteNombre() throws Exception {
         System.out.print("Nombre a buscar: ");
-        String nombre = sc.nextLine().trim();
+        String nombre = tcl.nextLine().trim();
         List<Cliente> resultado = clienteService.buscarPorNombre(nombre);
-        if (resultado.isEmpty()) { System.out.println("  Sin resultados."); return; }
+        if (resultado.isEmpty()) {
+            System.out.println("  Sin resultados.");
+            return;
+        }
         System.out.printf("%-6s %-18s %-18s %-15s%n", "ID", "Nombre", "Apellido", "Telefono");
         System.out.println("------------------------------------------------------------");
         for (Cliente c : resultado) {
             System.out.printf("%-6d %-18s %-18s %-15s%n",
-                c.getIdCliente(), c.getNombre(), c.getApellido(), c.getTelefono());
+                    c.getIdCliente(), c.getNombre(), c.getApellido(), c.getTelefono());
         }
     }
 
@@ -250,16 +324,20 @@ public class Main {
         System.out.print("\nID del cliente a actualizar: ");
         Integer id = leerEntero();
         System.out.println("(Enter para no cambiar el campo)");
-        System.out.print("Nuevo nombre     : "); String nombre    = sc.nextLine().trim();
-        System.out.print("Nuevo apellido   : "); String apellido  = sc.nextLine().trim();
-        System.out.print("Nuevo telefono   : "); String telefono  = sc.nextLine().trim();
-        System.out.print("Nueva direccion  : "); String direccion = sc.nextLine().trim();
+        System.out.print("Nuevo nombre     : ");
+        String nombre = tcl.nextLine().trim();
+        System.out.print("Nuevo apellido   : ");
+        String apellido = tcl.nextLine().trim();
+        System.out.print("Nuevo telefono   : ");
+        String telefono = tcl.nextLine().trim();
+        System.out.print("Nueva direccion  : ");
+        String direccion = tcl.nextLine().trim();
         clienteService.actualizarCliente(
-            id,
-            nombre.isEmpty()    ? null : nombre,
-            apellido.isEmpty()  ? null : apellido,
-            telefono.isEmpty()  ? null : telefono,
-            direccion.isEmpty() ? null : direccion
+                id,
+                nombre.isEmpty() ? null : nombre,
+                apellido.isEmpty() ? null : apellido,
+                telefono.isEmpty() ? null : telefono,
+                direccion.isEmpty() ? null : direccion
         );
     }
 
@@ -278,15 +356,20 @@ public class Main {
         System.out.println("  2. Express");
         System.out.println("  3. Internacional");
         System.out.print("Opcion: ");
-        String opTipo = sc.nextLine().trim();
+        String opTipo = tcl.nextLine().trim();
         String tipoEnvio;
         switch (opTipo) {
-            case "2": tipoEnvio = "Express";       break;
-            case "3": tipoEnvio = "Internacional"; break;
-            default:  tipoEnvio = "Estandar";
+            case "2":
+                tipoEnvio = "Express";
+                break;
+            case "3":
+                tipoEnvio = "Internacional";
+                break;
+            default:
+                tipoEnvio = "Estandar";
         }
         System.out.print("Direccion de entrega        : ");
-        String direccion = sc.nextLine().trim();
+        String direccion = tcl.nextLine().trim();
         paqueteService.registrarPaquete(idCliente, peso, tipoEnvio, direccion);
     }
 
@@ -302,9 +385,12 @@ public class Main {
 
     static void consultarPaquete() throws Exception {
         System.out.print("Numero de seguimiento: ");
-        String num = sc.nextLine().trim();
+        String num = tcl.nextLine().trim();
         Paquete p = paqueteService.buscarPorNumSeguimiento(num);
-        if (p == null) { System.out.println("  Paquete no encontrado."); return; }
+        if (p == null) {
+            System.out.println("  Paquete no encontrado.");
+            return;
+        }
         System.out.println("\n  -- Detalle del Paquete ---------------------");
         System.out.println("  Seguimiento  : " + p.getNumSeguimiento());
         System.out.println("  Estado       : " + p.getEstadoAct());
@@ -312,25 +398,28 @@ public class Main {
         System.out.println("  Peso         : " + p.getPeso() + " kg");
         System.out.println("  Direccion    : " + p.getDireccionEntrega());
         System.out.println("  Cliente      : " + p.getClienteidCliente().getNombre()
-                           + " " + p.getClienteidCliente().getApellido());
+                + " " + p.getClienteidCliente().getApellido());
         System.out.println("  Registrado   : " + formatFecha(p.getFechaRegistro()));
         System.out.println("  --------------------------------------------");
     }
 
     static void verHistorial() throws Exception {
         System.out.print("Numero de seguimiento: ");
-        String num = sc.nextLine().trim();
+        String num = tcl.nextLine().trim();
         List<Historialestado> historial = paqueteService.verHistorial(num);
-        if (historial.isEmpty()) { System.out.println("  Sin historial."); return; }
+        if (historial.isEmpty()) {
+            System.out.println("  Sin historial.");
+            return;
+        }
         System.out.println("\n  Historial de movimientos: " + num);
         System.out.println("------------------------------------------------------------");
         System.out.printf("  %-18s %-22s %-15s%n", "Estado", "Fecha y Hora", "Registrado por");
         System.out.println("------------------------------------------------------------");
         for (Historialestado h : historial) {
             System.out.printf("  %-18s %-22s %-15s%n",
-                h.getEstado(),
-                formatFecha(h.getFechaCambio()),
-                h.getUsuarioidUsuario().getNombre() + " " + h.getUsuarioidUsuario().getApellido());
+                    h.getEstado(),
+                    formatFecha(h.getFechaCambio()),
+                    h.getUsuarioidUsuario().getNombre() + " " + h.getUsuarioidUsuario().getApellido());
         }
     }
 
@@ -341,9 +430,9 @@ public class Main {
         System.out.println("--- Registrar Despacho ---");
         listarPaquetesPorEstado(PaqueteServicio.ESTADO_REGISTRADO);
         System.out.print("\nNumero de seguimiento a despachar  : ");
-        String num = sc.nextLine().trim();
+        String num = tcl.nextLine().trim();
         System.out.print("Observaciones (Enter para omitir)  : ");
-        String obs = sc.nextLine().trim();
+        String obs = tcl.nextLine().trim();
         despachoService.registrarDespacho(num, obs.isEmpty() ? null : obs);
     }
 
@@ -354,11 +443,11 @@ public class Main {
         System.out.println("--- Registrar Entrega ---");
         listarPaquetesPorEstado(PaqueteServicio.ESTADO_EN_TRANSITO);
         System.out.print("\nNumero de seguimiento a entregar   : ");
-        String num = sc.nextLine().trim();
+        String num = tcl.nextLine().trim();
         System.out.print("Nombre de quien recibe             : ");
-        String receptor = sc.nextLine().trim();
+        String receptor = tcl.nextLine().trim();
         System.out.print("Observaciones (Enter para omitir)  : ");
-        String obs = sc.nextLine().trim();
+        String obs = tcl.nextLine().trim();
         entregaService.registrarEntrega(num, receptor, obs.isEmpty() ? null : obs);
     }
 
@@ -367,10 +456,14 @@ public class Main {
     // ================================================================
     static void registrarUsuario() throws Exception {
         System.out.println("--- Registrar Nuevo Usuario ---");
-        System.out.print("Nombre     : "); String nombre      = sc.nextLine().trim();
-        System.out.print("Apellido   : "); String apellido    = sc.nextLine().trim();
-        System.out.print("Correo     : "); String correo      = sc.nextLine().trim();
-        System.out.print("Contrasena : "); String contrasenia = sc.nextLine().trim();
+        System.out.print("Nombre     : ");
+        String nombre = tcl.nextLine().trim();
+        System.out.print("Apellido   : ");
+        String apellido = tcl.nextLine().trim();
+        System.out.print("Correo     : ");
+        String correo = tcl.nextLine().trim();
+        System.out.print("Contrasena : ");
+        String contrasenia = tcl.nextLine().trim();
         System.out.println("Roles disponibles:");
         for (Rol r : rolService.listarTodos()) {
             System.out.println("  " + r.getIdRol() + ". " + r.getNomRol());
@@ -383,15 +476,18 @@ public class Main {
     static void listarUsuarios() throws Exception {
         System.out.println("--- Usuarios del Sistema ---");
         List<Usuario> lista = usuarioService.listarTodos();
-        if (lista.isEmpty()) { System.out.println("  Sin usuarios."); return; }
+        if (lista.isEmpty()) {
+            System.out.println("  Sin usuarios.");
+            return;
+        }
         System.out.printf("%-6s %-22s %-25s %-15s%n", "ID", "Nombre Completo", "Correo", "Rol");
         System.out.println("------------------------------------------------------------------------");
         for (Usuario u : lista) {
             System.out.printf("%-6d %-22s %-25s %-15s%n",
-                u.getIdUsuario(),
-                u.getNombre() + " " + u.getApellido(),
-                u.getCorreo(),
-                u.getRolidRol().getNomRol());
+                    u.getIdUsuario(),
+                    u.getNombre() + " " + u.getApellido(),
+                    u.getCorreo(),
+                    u.getRolidRol().getNomRol());
         }
     }
 
@@ -399,36 +495,47 @@ public class Main {
     // UTILIDADES
     // ================================================================
     static void imprimirPaquetes(List<Paquete> lista) {
-        if (lista.isEmpty()) { System.out.println("  Sin paquetes para mostrar."); return; }
+        if (lista.isEmpty()) {
+            System.out.println("  Sin paquetes para mostrar.");
+            return;
+        }
         System.out.printf("%-22s %-15s %-14s %-8s %-18s%n",
-            "Num. Seguimiento", "Estado", "Tipo Envio", "Peso", "Cliente");
+                "Num. Seguimiento", "Estado", "Tipo Envio", "Peso", "Cliente");
         System.out.println("--------------------------------------------------------------------------------");
         for (Paquete p : lista) {
             System.out.printf("%-22s %-15s %-14s %-8s %-18s%n",
-                p.getNumSeguimiento(),
-                p.getEstadoAct(),
-                p.getTipoEnvio(),
-                p.getPeso() + " kg",
-                p.getClienteidCliente().getNombre() + " " + p.getClienteidCliente().getApellido());
+                    p.getNumSeguimiento(),
+                    p.getEstadoAct(),
+                    p.getTipoEnvio(),
+                    p.getPeso() + " kg",
+                    p.getClienteidCliente().getNombre() + " " + p.getClienteidCliente().getApellido());
         }
     }
 
     static Integer leerEntero() {
         while (true) {
-            try { return Integer.parseInt(sc.nextLine().trim()); }
-            catch (NumberFormatException e) { System.out.print("  Ingrese un numero valido: "); }
+            try {
+                return Integer.parseInt(tcl.nextLine().trim());
+            } catch (NumberFormatException e) {
+                System.out.print("  Ingrese un numero valido: ");
+            }
         }
     }
 
     static BigDecimal leerDecimal() {
         while (true) {
-            try { return new BigDecimal(sc.nextLine().trim()); }
-            catch (Exception e) { System.out.print("  Ingrese un decimal valido (ej: 2.5): "); }
+            try {
+                return new BigDecimal(tcl.nextLine().trim());
+            } catch (Exception e) {
+                System.out.print("  Ingrese un decimal valido (ej: 2.5): ");
+            }
         }
     }
 
     static String formatFecha(java.util.Date fecha) {
-        if (fecha == null) return "-";
+        if (fecha == null) {
+            return "-";
+        }
         return new SimpleDateFormat("dd/MM/yyyy HH:mm").format(fecha);
     }
 }

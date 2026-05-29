@@ -71,7 +71,7 @@ public class InicializadorDatos {
                 rolRecepcionista.getIdRol()
             );
             System.out.println(" Usuario base creado: admin@sistema.com / admin123");
-            System.out.println("  (Cambie esta contraseña en producción)");
+            System.out.println("  (Cambie esta contrasenia en produccion)");
 
         } catch (Exception e) {
             System.out.println(" Error creando usuario base: " + e.getMessage());
